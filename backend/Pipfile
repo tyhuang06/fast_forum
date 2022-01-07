@@ -10,6 +10,10 @@ aerich = "*"
 asyncpg = "*"
 tortoise-orm = "*"
 python-dotenv = "*"
+passlib = "*"
+bcrypt = "*"
+python-jose = "*"
+python-multipart = "*"
 
 [dev-packages]
 
