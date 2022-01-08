@@ -22,6 +22,22 @@ async def create_user(user) -> GetUserSchema:
     return await GetUserSchema.from_tortoise_orm(user)
 
 
+async def update_user(user, current_user) -> GetUserSchema:
+    try:
+        db_user = await GetUserSchema.from_queryset_single(Users.get(id=current_user.id))
+    except DoesNotExist:
+        raise HTTPException(
+            status_code=404, detail=f"User {user.id} not found.")
+
+    if db_user.id == current_user.id:
+        print(current_user.dict(exclude_unset=True))
+        await Users.filter(id=db_user.id).update(**user.dict(exclude_unset=True))
+
+        return await GetUserSchema.from_queryset_single(Users.get(id=db_user.id))
+
+    raise HTTPException(status_code=403, detail=f"Not authorized to update.")
+
+
 async def delete_user(user_id, current_user) -> Status:
     try:
         user = await GetUserSchema.from_queryset_single(Users.get(id=user_id))
