@@ -26,7 +26,6 @@ const routes = [
 		path: "/dashboard",
 		name: "Dashboard",
 		component: () => import("../views/Dashboard.vue"),
-		meta: { requiresAuth: true },
 	},
 	{
 		path: "/profile",
@@ -45,6 +44,13 @@ const routes = [
 		path: "/post/:id/edit",
 		name: "EditPost",
 		component: () => import("../views/EditPost.vue"),
+		meta: { requiresAuth: true },
+		props: true,
+	},
+	{
+		path: "/post/create",
+		name: "CreatePost",
+		component: () => import("../views/CreatePost.vue"),
 		meta: { requiresAuth: true },
 		props: true,
 	},
