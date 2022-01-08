@@ -24,12 +24,12 @@ async def create_post(post, current_user) -> GetPostSchema:
 
 async def update_post(post_id, post, current_user) -> GetPostSchema:
     try:
-        post = await GetPostSchema.from_queryset_single(Posts.get(id=post_id))
+        db_post = await GetPostSchema.from_queryset_single(Posts.get(id=post_id))
     except DoesNotExist:
         raise HTTPException(
             status_code=404, detail=f"Post {post_id} not found")
 
-    if post.author.id == current_user.id:
+    if db_post.author.id == current_user.id:
         await Posts.filter(id=post_id).update(**post.dict(exclude_unset=True))
 
         return await GetPostSchema.from_queryset_single(Posts.get(id=post_id))
@@ -39,12 +39,12 @@ async def update_post(post_id, post, current_user) -> GetPostSchema:
 
 async def delete_post(post_id, current_user):
     try:
-        post = await GetPostSchema.from_queryset_single(Posts.get(id=post_id))
+        db_post = await GetPostSchema.from_queryset_single(Posts.get(id=post_id))
     except DoesNotExist:
         raise HTTPException(
             status_code=404, detail=f"Post {post_id} not found.")
 
-    if post.author.id == current_user.id:
+    if db_post.author.id == current_user.id:
         deleted_count = await Posts.filter(id=post_id).delete()
 
         if not deleted_count:

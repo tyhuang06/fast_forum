@@ -55,8 +55,9 @@ export default {
 					form: this.form,
 				};
 				await this.updatePost(post);
+
 				this.$router.push({
-					name: "post",
+					name: "Post",
 					params: { id: this.post.id },
 				});
 			} catch (error) {
