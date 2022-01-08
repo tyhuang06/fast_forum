@@ -3,9 +3,24 @@
 		<h1>Your Profile</h1>
 		<hr />
 		<br />
+
 		<div>
 			<div>
 				<img :src="this.profile_url" alt="" />
+			</div>
+			<div>
+				<form
+					@submit.prevent="uploadFile"
+					enctype="multipart/form-data"
+				>
+					<input
+						ref="file"
+						type="file"
+						id="file"
+						@change="handleFileUpload()"
+					/>
+					<button type="submit">Upload</button>
+				</form>
 			</div>
 			<p>
 				<strong>Username:</strong> <span>{{ user.username }}</span>
@@ -14,21 +29,17 @@
 				<strong>Email:</strong> <span>{{ user.email }}</span>
 			</p>
 			<p>
+				<router-link
+					:to="{ name: 'ProfileUpdate' }"
+					class="btn btn-primary"
+					>Edit</router-link
+				>
+			</p>
+			<p>
 				<button @click="deleteAccount()" class="btn btn-primary">
 					Delete Account
 				</button>
 			</p>
-		</div>
-		<div>
-			<form @submit.prevent="upload_file" enctype="multipart/form-data">
-				<input
-					ref="file"
-					type="file"
-					id="file"
-					@change="handleFileUpload()"
-				/>
-				<button type="submit">Upload</button>
-			</form>
 		</div>
 	</section>
 </template>
@@ -66,14 +77,14 @@ export default {
 				console.error(error);
 			}
 		},
-		async upload_file() {
+		async uploadFile() {
 			try {
 				let formData = new FormData();
 				formData.append("file", this.file);
 				console.log(formData);
 				await this.uploadProfile(formData);
 
-				this.$router.push({
+				this.$router.go({
 					name: "Profile",
 				});
 			} catch (error) {

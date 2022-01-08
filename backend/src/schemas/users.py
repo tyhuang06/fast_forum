@@ -16,4 +16,4 @@ UserDatabaseSchema = pydantic_model_creator(
 
 
 class UpdateUser(BaseModel):
-    username: Optional[str]
+    password: Optional[str]

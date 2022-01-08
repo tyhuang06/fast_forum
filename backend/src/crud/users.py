@@ -63,6 +63,8 @@ async def update_user(user, current_user) -> GetUserSchema:
         raise HTTPException(
             status_code=404, detail=f"User {user.id} not found.")
 
+    user.password = pwd_context.encrypt(user.password)
+
     if db_user.id == current_user.id:
         await Users.filter(id=db_user.id).update(**user.dict(exclude_unset=True))
 
