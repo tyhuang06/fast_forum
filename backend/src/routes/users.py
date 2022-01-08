@@ -12,6 +12,8 @@ from src.auth.users import validate_user
 from src.schemas.token import Status
 from src.schemas.users import CreateUserSchema, GetUserSchema, UpdateUser
 
+from fastapi import File, UploadFile
+
 from src.auth.jwthandler import (
     create_access_token,
     get_current_user,
@@ -74,6 +76,16 @@ async def update_user(
         user: UpdateUser,
         current_user: GetUserSchema = Depends(get_current_user)) -> GetUserSchema:
     return await crud.update_user(user, current_user)
+
+
+@router.post(
+    "/user/account/upload",
+    dependencies=[Depends(get_current_user)],
+    response_model=GetUserSchema,)
+async def create_upload_file(
+        file: UploadFile = File(...),
+        current_user: GetUserSchema = Depends(get_current_user)):
+    return await crud.upload_picture(file, current_user)
 
 
 @router.delete(

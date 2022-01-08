@@ -6,8 +6,42 @@ from src.database.models import Users
 from src.schemas.users import GetUserSchema
 from src.schemas.token import Status
 
+# For file upload
+import secrets
+from PIL import Image
 
+FILEPATH = "./static/images/"
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+
+# Helper Functions
+async def upload_picture(file, current_user):
+    print(FILEPATH)
+    filename = file.filename
+    _, ext = filename.split(".")
+
+    random_name = secrets.token_hex(8) + "." + ext
+    file_path = FILEPATH + random_name
+
+    # Pillow - shink image
+    file_content = await file.read()
+
+    with open(file_path, "wb") as file:
+        file.write(file_content)
+
+    img = Image.open(file_path)
+    img = img.resize(size=(125, 125))
+    img.save(file_path)
+
+    file.close()
+
+    # Store in DB
+    user = await Users.get(id=current_user.id)
+    user.profile_pic = random_name
+
+    await user.save()
+
+    return await GetUserSchema.from_queryset_single(Users.get(id=user.id))
 
 
 async def create_user(user) -> GetUserSchema:
@@ -30,7 +64,6 @@ async def update_user(user, current_user) -> GetUserSchema:
             status_code=404, detail=f"User {user.id} not found.")
 
     if db_user.id == current_user.id:
-        print(current_user.dict(exclude_unset=True))
         await Users.filter(id=db_user.id).update(**user.dict(exclude_unset=True))
 
         return await GetUserSchema.from_queryset_single(Users.get(id=db_user.id))

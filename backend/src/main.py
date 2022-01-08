@@ -4,8 +4,12 @@ from src.database.register import register_tortoise
 from src.database.config import TORTOISE_ORM
 from src.routes import users, posts
 
+from fastapi.staticfiles import StaticFiles
+
 
 app = FastAPI()
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 
 origins = ["http://localhost:8080"]
 
