@@ -1,8 +1,51 @@
 <template>
 	<header>
+		<div class="navbar w-full flex fixed">
+			<div class="flex w-full justify-between items-center mx-16">
+				<div class="nav_left flex items-center">
+					<a class="flex text-2xl mr-4" href="/">Dcard</a>
+					<ul class="flex flex-row h-full items-center">
+						<li class="nav_link">
+							<router-link class="" to="/">Home</router-link>
+						</li>
+						<li class="nav_link">
+							<router-link class="" to="/dashboard"
+								>Dashboard</router-link
+							>
+						</li>
+					</ul>
+				</div>
+				<div class="nav_right flex items-center">
+					<ul
+						v-if="isLoggedIn"
+						class="flex flex-row h-full items-center self-end"
+					>
+						<li class="nav_link">
+							<router-link class="" to="/profile"
+								>My Profile</router-link
+							>
+						</li>
+						<li class="nav_link">
+							<a class="" @click="logout">Log Out</a>
+						</li>
+					</ul>
+					<ul v-else class="flex flex-row h-full items-center">
+						<li class="nav_link">
+							<router-link class="" to="/register"
+								>Register</router-link
+							>
+						</li>
+						<li class="nav_link">
+							<router-link class="" to="/login"
+								>Log In</router-link
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
 		<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-			<div class="container">
-				<a class="navbar-brand" href="/">FastAPI + Vue</a>
+			<div class="">
 				<button
 					class="navbar-toggler"
 					type="button"
@@ -14,48 +57,7 @@
 				>
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="collapse navbar-collapse" id="navbarCollapse">
-					<ul
-						v-if="isLoggedIn"
-						class="navbar-nav me-auto mb-2 mb-md-0"
-					>
-						<li class="nav-item">
-							<router-link class="nav-link" to="/"
-								>Home</router-link
-							>
-						</li>
-						<li class="nav-item">
-							<router-link class="nav-link" to="/dashboard"
-								>Dashboard</router-link
-							>
-						</li>
-						<li class="nav-item">
-							<router-link class="nav-link" to="/profile"
-								>My Profile</router-link
-							>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" @click="logout">Log Out</a>
-						</li>
-					</ul>
-					<ul v-else class="navbar-nav me-auto mb-2 mb-md-0">
-						<li class="nav-item">
-							<router-link class="nav-link" to="/"
-								>Home</router-link
-							>
-						</li>
-						<li class="nav-item">
-							<router-link class="nav-link" to="/register"
-								>Register</router-link
-							>
-						</li>
-						<li class="nav-item">
-							<router-link class="nav-link" to="/login"
-								>Log In</router-link
-							>
-						</li>
-					</ul>
-				</div>
+				<div class="collapse navbar-collapse" id="navbarCollapse"></div>
 			</div>
 		</nav>
 	</header>
@@ -78,8 +80,12 @@ export default {
 };
 </script>
 
-<style scoped>
-a {
-	cursor: pointer;
+<style lang="postcss">
+.navbar {
+	height: 60px;
+}
+
+.nav_link {
+	@apply px-4 cursor-pointer;
 }
 </style>
