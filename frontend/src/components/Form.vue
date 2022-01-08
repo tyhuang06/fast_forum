@@ -1,23 +1,24 @@
 <template>
 	<form @submit.prevent="submit">
 		<div class="mb-3">
-			<label for="title" class="form-label">Title:</label>
-			<input
+			<FormulateInput
 				type="text"
 				name="title"
+				label="Title:"
+				validation="required"
 				v-model="form.title"
-				class="form-control"
 			/>
 		</div>
 		<div class="mb-3">
-			<label for="content" class="form-label">Content:</label>
-			<textarea
+			<FormulateInput
+				type="textarea"
 				name="content"
+				label="Content:"
+				validation="required"
 				v-model="form.content"
-				class="form-control"
-			></textarea>
+			/>
 		</div>
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<FormulateInput type="submit" name="Submit" />
 	</form>
 </template>
 
