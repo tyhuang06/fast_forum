@@ -4,17 +4,17 @@
 		<hr />
 		<br />
 
-		<Form :submit="submit" :form="form" />
+		<PostForm :submit="submit" :form="form" />
 	</section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Form from "@/components/Form.vue";
+import PostForm from "@/components/PostForm.vue";
 export default {
 	name: "CreatePost",
 	components: {
-		Form,
+		PostForm,
 	},
 	data() {
 		return {
