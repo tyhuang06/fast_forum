@@ -3,35 +3,19 @@
 		<h1>Edit Post</h1>
 		<hr />
 		<br />
-
-		<form @submit.prevent="submit">
-			<div class="mb-3">
-				<label for="title" class="form-label">Title:</label>
-				<input
-					type="text"
-					name="title"
-					v-model="form.title"
-					class="form-control"
-				/>
-			</div>
-			<div class="mb-3">
-				<label for="content" class="form-label">Content:</label>
-				<textarea
-					name="content"
-					v-model="form.content"
-					class="form-control"
-				></textarea>
-			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
+		<Form :submit="submit" :form="form" />
 	</section>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import Form from "@/components/Form.vue";
 export default {
 	name: "EditPost",
 	props: ["id"],
+	components: {
+		Form,
+	},
 	data() {
 		return {
 			form: {
