@@ -4,6 +4,9 @@
 		<hr />
 		<br />
 		<div>
+			<div>
+				<img :src="this.profile_url" alt="" />
+			</div>
 			<p>
 				<strong>Username:</strong> <span>{{ user.username }}</span>
 			</p>
@@ -44,6 +47,13 @@ export default {
 	},
 	computed: {
 		...mapGetters({ user: "stateUser" }),
+		profile_url: function () {
+			let url =
+				process.env.VUE_APP_BACKEND_API +
+				"static/images/" +
+				this.user.profile_pic;
+			return url;
+		},
 	},
 	methods: {
 		...mapActions(["deleteUser", "uploadProfile"]),
