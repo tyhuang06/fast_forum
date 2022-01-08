@@ -1,9 +1,11 @@
 import Vue from "vue";
 import App from "./App.vue";
 
+import "./index.css";
 import router from "./router";
 import store from "./store";
 import axios from "axios";
+import './assets/tailwind.css'
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "http://localhost:8000/"; // FastAPI backend

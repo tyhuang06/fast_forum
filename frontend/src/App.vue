@@ -26,6 +26,6 @@ export default {
 }
 
 .main {
-	padding-top: 5em;
+	@apply pt-2;
 }
 </style>
