@@ -16,6 +16,17 @@
 				</button>
 			</p>
 		</div>
+		<div>
+			<form @submit.prevent="upload_file" enctype="multipart/form-data">
+				<input
+					ref="file"
+					type="file"
+					id="file"
+					@change="handleFileUpload()"
+				/>
+				<button type="submit">Upload</button>
+			</form>
+		</div>
 	</section>
 </template>
 
@@ -23,6 +34,11 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
 	name: "Profile",
+	data() {
+		return {
+			file: "",
+		};
+	},
 	created: function () {
 		return this.$store.dispatch("viewAccount");
 	},
@@ -30,7 +46,7 @@ export default {
 		...mapGetters({ user: "stateUser" }),
 	},
 	methods: {
-		...mapActions(["deleteUser"]),
+		...mapActions(["deleteUser", "uploadProfile"]),
 		async deleteAccount() {
 			try {
 				await this.deleteUser(this.user.id);
@@ -39,6 +55,24 @@ export default {
 			} catch (error) {
 				console.error(error);
 			}
+		},
+		async upload_file() {
+			try {
+				let formData = new FormData();
+				formData.append("file", this.file);
+				console.log(formData);
+				await this.uploadProfile(formData);
+
+				this.$router.push({
+					name: "Profile",
+				});
+			} catch (error) {
+				console.log(error);
+			}
+		},
+		handleFileUpload() {
+			this.file = this.$refs.file.files[0];
+			console.log(this.file);
 		},
 	},
 };

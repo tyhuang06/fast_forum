@@ -25,6 +25,15 @@ const actions = {
 		let { data } = await axios.get("user/account");
 		await commit("setUser", data);
 	},
+	// async updateUser({}) {},
+	// eslint-disable-next-line no-empty-pattern
+	async uploadProfile({}, form) {
+		await axios.post("user/account/upload", form, {
+			headers: {
+				"Content-Type": "multipart/form-data",
+			},
+		});
+	},
 	// eslint-disable-next-line no-empty-pattern
 	async deleteUser({}, id) {
 		await axios.delete(`user/${id}/delete`);

@@ -10,10 +10,16 @@ import "@braid/vue-formulate/dist/snow.min.css";
 
 import VueFormulate from "@braid/vue-formulate";
 
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = "http://localhost:8000/"; // FastAPI backend
-
 Vue.config.productionTip = false;
+
+new Vue({
+	router,
+	store,
+	render: (h) => h(App),
+}).$mount("#app");
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = process.env.VUE_APP_BACKEND_API; // FastAPI backend
 
 // Handle expired tokens
 axios.interceptors.response.use(undefined, function (error) {
@@ -26,11 +32,5 @@ axios.interceptors.response.use(undefined, function (error) {
 		}
 	}
 });
-
-new Vue({
-	router,
-	store,
-	render: (h) => h(App),
-}).$mount("#app");
 
 Vue.use(VueFormulate);

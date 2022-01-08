@@ -17,7 +17,6 @@ router = APIRouter()
 @router.get(
     "/post",
     response_model=List[GetPostSchema],
-    dependencies=[Depends(get_current_user)],
 )
 async def get_posts():
     return await crud.get_posts()
