@@ -15,12 +15,12 @@ const routes = [
 	{
 		path: "/register",
 		name: "Register",
-		component: () => import("../views/Register.vue"),
+		component: () => import("../views/users/Register.vue"),
 	},
 	{
 		path: "/login",
 		name: "Login",
-		component: () => import("../views/Login.vue"),
+		component: () => import("../views/users/Login.vue"),
 	},
 	{
 		path: "/dashboard",
@@ -30,27 +30,27 @@ const routes = [
 	{
 		path: "/profile",
 		name: "Profile",
-		component: () => import("../views/Profile.vue"),
+		component: () => import("../views/users/Profile.vue"),
 		meta: { requiresAuth: true },
 	},
 	{
 		path: "/post/:id",
 		name: "Post",
-		component: () => import("../views/Post.vue"),
+		component: () => import("../views/posts/Post.vue"),
 		meta: { requiresAuth: true },
 		props: true,
 	},
 	{
 		path: "/post/:id/edit",
 		name: "EditPost",
-		component: () => import("../views/EditPost.vue"),
+		component: () => import("../views/posts/EditPost.vue"),
 		meta: { requiresAuth: true },
 		props: true,
 	},
 	{
 		path: "/post/create",
 		name: "CreatePost",
-		component: () => import("../views/CreatePost.vue"),
+		component: () => import("../views/posts/CreatePost.vue"),
 		meta: { requiresAuth: true },
 		props: true,
 	},
