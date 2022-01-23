@@ -19,3 +19,4 @@ Frontend
 
 -   [ ] Styling
 -   [ ] RWD
+-   [ ] Profile Link

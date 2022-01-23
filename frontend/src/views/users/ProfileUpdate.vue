@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<h1>Edit Account</h1>
+		<div class="text-2xl">Edit Account</div>
 		<hr />
 		<br />
 

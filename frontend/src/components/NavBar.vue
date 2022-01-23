@@ -3,7 +3,7 @@
 		<div class="navbar w-full flex fixed">
 			<div class="flex w-full justify-between items-center mx-16">
 				<div class="nav_left flex items-center">
-					<a class="flex text-2xl mr-4" href="/">Dcard</a>
+					<a class="flex text-2xl mr-4" href="/">Fast Forum</a>
 					<ul class="flex flex-row h-full items-center">
 						<li class="nav_link">
 							<router-link class="" to="/">Home</router-link>
@@ -82,6 +82,7 @@ export default {
 
 <style lang="postcss">
 .navbar {
+	@apply shadow;
 	height: 60px;
 }
 

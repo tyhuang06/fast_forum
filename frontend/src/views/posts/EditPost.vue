@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<h1>Edit Post</h1>
+		<div class="text-2xl">Edit Post</div>
 		<hr />
 		<br />
 		<PostForm :submit="submit" :form="form" />

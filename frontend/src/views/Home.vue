@@ -1,17 +1,25 @@
 <template>
-	<section>
-		<p>This site is built with FastAPI and Vue.</p>
+	<section class="text-lg">
+		<div>This is a forum site built with FastAPI and Vue.</div>
 
-		<div v-if="isLoggedIn" id="logout">
-			<p id="logout">
-				Click <a href="/dashboard">here</a> to view all notes.
-			</p>
+		<div>
+			<a href="/dashboard" class="text-blue-700">Click here</a> to view
+			all posts.
 		</div>
-		<p v-else>
+		<div>
+			<a
+				href="https://github.com/tyhuang06/fast_forum"
+				class="text-blue-700"
+				>Click here</a
+			>
+			to view Github repo.
+		</div>
+
+		<div v-if="!isLoggedIn">
 			<span><a href="/register">Register</a></span>
 			<span> or </span>
 			<span><a href="/login">Log In</a></span>
-		</p>
+		</div>
 	</section>
 </template>
 

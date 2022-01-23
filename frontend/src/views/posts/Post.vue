@@ -1,22 +1,36 @@
 <template>
 	<div v-if="post">
-		<p><strong>Title:</strong> {{ post.title }}</p>
-		<p><strong>Content:</strong> {{ post.content }}</p>
-		<p><strong>Author:</strong> {{ post.author.username }}</p>
+		<div class="flex flex-col">
+			<div class="flex justify-between items-center">
+				<div class="text-2xl font-bold">
+					{{ post.title }}
+				</div>
+				<div class="ml-2">
+					Posted by
+					<span class="text-blue-700">{{
+						post.author.username
+					}}</span>
+				</div>
+			</div>
+			<div class="mt-4">{{ post.content }}</div>
+		</div>
 
-		<div v-if="user.id === post.author.id">
-			<p>
+		<div v-if="user.id === post.author.id" class="flex justify-end mt-4">
+			<div class="flex">
 				<router-link
 					:to="{ name: 'EditPost', params: { id: post.id } }"
-					class="btn btn-primary"
+					class="button-base"
 					>Edit</router-link
 				>
-			</p>
-			<p>
-				<button @click="removePost()" class="btn btn-secondary">
+			</div>
+			<div class="flex">
+				<button
+					@click="removePost()"
+					class="button-base bg-red-700 ml-2 hover:bg-red-500"
+				>
 					Delete
 				</button>
-			</p>
+			</div>
 		</div>
 	</div>
 </template>

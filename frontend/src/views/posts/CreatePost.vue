@@ -1,6 +1,6 @@
 <template>
 	<section>
-		<h1>Add new Post</h1>
+		<div class="text-2xl">Create New Post</div>
 		<hr />
 		<br />
 

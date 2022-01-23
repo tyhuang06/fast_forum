@@ -1,45 +1,62 @@
 <template>
 	<section>
-		<h1>Your Profile</h1>
+		<div class="text-2xl">Profile</div>
 		<hr />
 		<br />
 
-		<div>
-			<div>
-				<img :src="this.profile_url" alt="" />
+		<div class="flex flex-col">
+			<div class="flex justify-between">
+				<div class="flex">
+					<img :src="this.profile_url" alt="" />
+				</div>
+				<div class="flex flex-col pl-4">
+					<div class="mb-2">New Profile Picture</div>
+					<form
+						@submit.prevent="uploadFile"
+						enctype="multipart/form-data"
+					>
+						<input
+							ref="file"
+							type="file"
+							id="file"
+							@change="handleFileUpload()"
+						/>
+						<button
+							type="submit"
+							class="button-base bg-green-600 hover:bg-green-500 mt-2"
+						>
+							Upload Picture
+						</button>
+					</form>
+				</div>
 			</div>
-			<div>
-				<form
-					@submit.prevent="uploadFile"
-					enctype="multipart/form-data"
-				>
-					<input
-						ref="file"
-						type="file"
-						id="file"
-						@change="handleFileUpload()"
-					/>
-					<button type="submit">Upload</button>
-				</form>
+			<div class="mt-4 text-xl">
+				<div>
+					<strong>Username:</strong> <span>{{ user.username }}</span>
+				</div>
+				<div>
+					<strong>Email:</strong> <span>{{ user.email }}</span>
+				</div>
 			</div>
-			<p>
-				<strong>Username:</strong> <span>{{ user.username }}</span>
-			</p>
-			<p>
-				<strong>Email:</strong> <span>{{ user.email }}</span>
-			</p>
-			<p>
-				<router-link
-					:to="{ name: 'ProfileUpdate' }"
-					class="btn btn-primary"
-					>Edit</router-link
-				>
-			</p>
-			<p>
-				<button @click="deleteAccount()" class="btn btn-primary">
-					Delete Account
-				</button>
-			</p>
+			<br />
+			<hr />
+			<div class="flex mt-4">
+				<div class="flex">
+					<router-link
+						:to="{ name: 'ProfileUpdate' }"
+						class="button-base"
+						>Edit</router-link
+					>
+				</div>
+				<div>
+					<button
+						@click="deleteAccount()"
+						class="button-base bg-red-700 ml-2 hover:bg-red-500"
+					>
+						Delete Account
+					</button>
+				</div>
+			</div>
 		</div>
 	</section>
 </template>

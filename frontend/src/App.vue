@@ -27,6 +27,6 @@ export default {
 }
 
 .container {
-	@apply pt-4 px-60;
+	@apply pt-6 px-60;
 }
 </style>
