@@ -12,7 +12,7 @@
 			</div>
 			<div class="mb-3">
 				<FormulateInput
-					type="text"
+					type="password"
 					name="password"
 					label="Password:"
 					validation="required"
